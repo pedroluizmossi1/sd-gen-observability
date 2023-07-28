@@ -41,6 +41,9 @@ services:
     logging: *default-logging
 
   grafana:
+    build:
+      context: .
+      dockerfile: /etc/grafana/redis.dockerfile  # Use the Redis Datasource Dockerfile
     image: grafana/grafana:10.0.2
     ports:
       - "3000:3000"
@@ -54,5 +57,11 @@ services:
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
-      # GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_INSTALL_PLUGINS: "redis-datasource"  # Install the plugin
     logging: *default-logging
+
+
+
+
+
+
